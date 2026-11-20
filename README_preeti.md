@@ -16,14 +16,16 @@ Both groups went through the same five recorded events: `start`, `step_1`, `step
 
 | Question | Answer |
 |----------|--------|
-| Has the user experience improved? | Partly. Clients finish more often and the typical client is faster, but navigation did not improve. |
-| Is the process completed more often? | Yes: 68.0% vs 64.6% (+3.4 pp, p < 0.001). |
-| Do clients take less time? | The typical client does: median effective time 4:40 vs 4:58. The mean is slightly higher. |
-| Fewer navigation errors? | No. More Test completers repeated a step (55% vs 52%). |
-| What improved, what is a bottleneck? | Exits at `start` fell. `step_1` and the confirmation page are bottlenecks. |
-| Deploy the new design? | Yes, then fix `step_1`, the confirmation page and tracking. |
+| Has the user experience improved? | Mostly. More clients finish, fewer quit, and the typical client is faster. Step 1, step 3 and the confirmation page need work. |
+| Is the process completed more often? | Yes: 68.0% vs 64.6% (+3.4 pp, p < 0.001), about 900 more completions. |
+| Do clients take less time? | The typical client does: median effective time 4:40 vs 4:58 (perfect runs 3:01 vs 3:46). The mean is slightly higher. |
+| Fewer navigation errors? | Step repeats excluding confirm fall (48.9% to 44.8%). Repeated confirms rise (6.8% to 19.9%). |
+| What improved, what is a bottleneck? | Exits at the start fall. Step 1 and step 3 lose more clients; the confirmation page causes repeats. |
+| Deploy the new design? | Yes, in a staged rollout (25% to 50% to 100%), with fixes. |
 
 **Final presentation:** [Google Slides](https://docs.google.com/presentation/d/1wuBYRunZzUmXItrHm8rkECs_bT5D27KTO1fmxMkKjzE/edit)
+
+**Team (FCCP Solutions):** Catarina Macedo, Preeti Tewatia, Charles Payne, Francisco Reis.
 
 ## 2. Research Questions
 
@@ -75,6 +77,7 @@ Analysed on one row per client (not per web event), so each client counts once.
 - **Balance** is right-skewed (the mean is more than double the median), so medians and log-scale plots are used. About one third of clients have an unspecified gender.
 - **Comparability tests:** Mann-Whitney for numeric variables, chi-squared for gender. With 50,500 clients, small p-values can appear for tiny gaps, so the size of the gap is judged as well.
 - **Correlation heat maps** were drawn for each group, with the same colour scale. Similar matrices mean the two groups have the same structure. `client_tenure_yr` and `client_tenure_mnth` are almost the same variable.
+- **Gender counts:** female 8,716 Test / 7,543 Control; male 8,977 / 7,970; unspecified 9,275 / 8,019. **Age** is bimodal, with peaks at 25-35 and 50-65.
 - **Result:** Test and Control are very similar. Median age, tenure, accounts, calls and logons are identical in both groups; the median balance is 0.8% lower in Test (65,468 vs 66,024); mean age differs by 0.3 years; and no gender share differs by more than 0.6 pp. Differences in completion are therefore more likely due to the design than to who was in each group.
 
 ## 4. Methodology
@@ -100,7 +103,7 @@ The client is the unit because the experiment assigns clients, not visits. A mis
 
 **Statistical analysis**
 - 2x2 chi-squared test on completion, with Cramer's V as the effect size.
-- Chi-squared on the last step reached (observed vs expected counts) to locate where clients stop.
+- Chi-squared on the last step reached (observed vs expected counts) to locate where clients stop (chi-squared = 242.2, p < 0.001, Cramer's V = 0.07).
 - Assumption: independent clients, one group each. The large sample meets the chi-squared conditions.
 - With this many clients, significance is easy to reach, so effect size and business relevance are reported too.
 
@@ -113,7 +116,7 @@ The client is the unit because the experiment assigns clients, not visits. A mis
 | Completed with repetitions | 37.3% (10,065) | 33.3% (7,846) | +4.0 pp |
 | Incomplete | 32.0% | 35.4% | -3.4 pp |
 
-**Completion.** Test is 3.4 pp higher (chi-squared = 64.2, p < 0.001). The effect is small (Cramer's V = 0.04). Most of the gain comes from completions with repetitions.
+**Completion.** Test is 3.4 pp higher (chi-squared = 64.2, p < 0.001), about 900 more completions. The effect is small (Cramer's V = 0.04).
 
 **Where clients stop (last step reached)**
 
@@ -125,41 +128,42 @@ The client is the unit because the experiment assigns clients, not visits. A mis
 | Step 3 | 2,190 / 2,192 | 2,513 / 2,511 | the same |
 | Confirm | 15,206 / 15,631 | 18,338 / 17,913 | 425 more completed |
 
-Exits at `start` fell from 14.1% to 9.8% of clients. More Test clients than expected stopped at `step_1`, a possible bottleneck.
+**Abandonment** (clients who started in order and never reached confirm): 34.26% in Control vs 30.60% in Test. By step (share of abandoners, Control to Test): start 40.75% to 29.74%, step 1 18.00% to 23.90%, step 3 25.69% to 29.35%. Drop-off moves from the start to step 1 and step 3.
 
-**Time.** Median completion time is 5:53 in Test vs 6:17 in Control (perfect completions 3:01 vs 3:46). Median effective time of completers is 4:40 vs 4:58, 18 seconds faster. Mean effective time is slightly higher in Test (7:51 vs 7:36), possibly because clients are still getting used to the new interface.
+**Time.** Median effective time (gaps over 30 minutes treated as idle) is 4:40 in Test vs 4:58 in Control; perfect completions take 3:01 vs 3:46. The mean is slightly higher in Test (7:51 vs 7:36) because a minority of Test clients take much longer.
 
-**Navigation errors.** They did not fall. 55% of Test completers repeated a step (52% in Control), and repeated confirms increased sharply. Out-of-order journeys are rare (Test 1.55%, Control 1.23%) and their cause is unknown.
+**Repeated steps.** Excluding confirm, repeats fall from 48.9% to 44.8%. Including confirm, more Test completers repeat a step (54.9% vs 51.6%), because repeated confirms rise from 6.8% to 19.9%. Clients seem to return to check that the submission worked.
 
-**Abandonment (clients who followed the order).** 30.6% in Test vs 34.3% in Control.
+**Step 3 and step 1.** Step 3 is the longest step (1:15 to 0:47 in Test) and about 1 in 5 clients go back from it. Backward moves from step 1 almost double (9.6% to 18.0%).
 
-**Age.** [Add completion rate by age group for Test and Control, and whether age changes the effect.]
+**Tracking gaps.** Missing steps are more frequent in Test (1.29% vs 0.97%), and confirm-only journeys are 193 vs 36.
 
-**Statistical vs practical significance.** The completion gain is statistically significant but small in size (about 5% relative). Its value depends on the size of the customer base and the cost of rolling out the new design.
+**Statistical vs practical significance.** The completion gain is statistically significant but small (about 5% relative). Its value depends on the customer base and the rollout cost.
 
 ## 6. Conclusions
 
-**What the experiment shows.** The new interface gets more clients through the process and loses fewer at the start, and the typical client is slightly faster. It does not reduce repeated steps.
+**What the experiment shows.** The new interface gets more clients through, loses fewer overall, and is faster for the typical client. Friction moves to step 1, step 3 and the confirmation page.
 
-**Statistical support.** The completion difference is significant (p < 0.001) but small (V = 0.04). The groups are comparable, which supports attributing the gap to the design.
+**Statistical support.** The completion difference is significant (p < 0.001) but small (V = 0.04). Test and Control have the same demographic profile, but the unequal split (53.4% vs 46.6%) is unexplained.
 
-**Recommendation.** Deploy the new design, then fix three things in the first release:
-1. `step_1`, where more clients than expected stop.
-2. The confirmation page, where repeated confirms increased.
-3. Event tracking, because out-of-order journeys are unexplained. They are not counted as completions, so they may understate the gain in Test.
+**Recommendation.** Launch the new design in a staged rollout (25% to 50% to 100%), and before or during it:
+1. Audit the traffic split with engineering.
+2. Simplify or pre-fill step 1.
+3. Split or pre-fill step 3.
+4. Show a clear confirmation message, reference ID and email.
+5. Fix event tracking in Test.
+6. Validate with usability tests, and compare the roughly 900 extra completions with the rollout cost.
 
 **Limitations**
-- Completion is measured per client across all sessions.
-- Test duration is not known, and a novelty effect cannot be ruled out.
+- Unequal group split: Test is 53.4% vs 46.6% Control, which deviates from 50/50.
 - 20,109 clients have no group label and were excluded.
-- Out-of-order journeys are unexplained, so they are not used for the decision.
-- The effect is small, and there is no revenue or cost data.
+- Tracking gaps in Test; behaviour is observed, not the reasons behind it.
+- Analytical choices: 5,934 duplicate events removed, gaps over 30 minutes excluded, repeats treated as friction.
+- The test ran from March to June 2017. There is no revenue, migration cost or satisfaction data.
 
 ## Appendix
 
 How journeys were rebuilt and time was measured: see the appendix slide and the notebooks in `/notebooks`.
-
-Justify your recommendation using the results of your analysis and their business implications.
 
 ## 7. Next Steps
 
